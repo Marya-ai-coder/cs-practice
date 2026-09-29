@@ -2,5 +2,7 @@ first = int(input())
 second = int(input())
 sum_ = first + second
 minus = first - second
+multipl = first * second
 print(sum_)
 ptint(minus)
+print(multipl)
