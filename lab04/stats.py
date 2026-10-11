@@ -1,4 +1,4 @@
-def parse_record(line:str): # -> dict
+def parse_record(line:str) -> dict:
     
     # разбирает строку "город;температура;дата" в словарь Негодная строка - ValueError
     
@@ -27,14 +27,33 @@ def parse_record(line:str): # -> dict
     # возвращаем результат в виде словаря
     return {'city':city,'temp':temp,'date':date}
      
-def read_valid(lines: list[str]): # -> list[dict]
+def read_valid(lines: list[str]) -> list[dict]:
     # разбирает строки журнала, пропуская пустые и негодные
-    try:
-    except:
 
-def average_by_city(records: list[dict]): # -> dict
+    res = [] # создаём список в который поместим результаты
+    
+    for line in lines:
+        if not line.strip(): # если пустая строка или пробелы - пропускаем
+            continue
+        try:
+            res.append(parse_record(line)) # пробуем вызывать 1ю функцию, если не выходит - пропускаем
+        except:
+            continue
+    return res # возвращаем результат в виде списка словарей
+
+def average_by_city(records: list[dict]) -> dict:
     # средняя температура по каждому городу округленная по десятых
 
+    total = {} # создаем словарь в котором считаем сумму температур по городу
+    count = {} # создаём словарь в котором считаем колличество записей
+
+    for rec in records:
+        city = rec['city']
+        temp = rec['temp']
+        total[city] = total.get(city, 0.0) + temp
+        count[city] = count.get(city, 0) + 1
+
+    return {city: round(total[city]
 def warmes_city(records: list[dict]): # ->str
     # город с наибольшей средней температурой. При равенстве - первый по алфавиту
     
