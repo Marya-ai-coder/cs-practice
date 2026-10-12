@@ -25,7 +25,7 @@ def parse_record(line:str) -> dict:
         raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
 
     # возвращаем результат в виде словаря
-    return {'city':city,'temp':temp,'date':date}
+    return {'city':city,'temperature':temp,'date':date}
      
 def read_valid(lines: list[str]) -> list[dict]:
     # разбирает строки журнала, пропуская пустые и негодные
@@ -49,7 +49,7 @@ def average_by_city(records: list[dict]) -> dict:
 
     for rec in records: # проходимя по словарям из списка словарей
         city = rec['city'] # присваиваю переменной city значение города для имеено этой итерации
-        temp = rec['temp'] 
+        temp = rec['temperature'] 
         total[city] = total.get(city, 0.0) + temp #обращаюсь к словарю total по ключу city значение которого я присвоила еще пару строк назад. \n
         # с помощью get я достаю определённое значение под данным ключом и к этому значению добавляю температуру. \n
         # если ключ встрнечается впервые, то get вернёт значение заданное по умолчанию (0.0) и добавляю значение температуры из переменной выше
