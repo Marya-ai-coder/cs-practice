@@ -2,7 +2,7 @@ def parse_record(line:str) -> dict:
     
     # разбирает строку "город;температура;дата" в словарь Негодная строка - ValueError
     
-    parts = line.splite(';') # список ["город";"температура";"дата"]
+    parts = line.split(';') # список ["город";"температура";"дата"]
 
     # проверяем на ошибку в колличестве введенного
     if len(parts) != 3:
@@ -61,11 +61,13 @@ def average_by_city(records: list[dict]) -> dict:
         sred[city] = round(total[city]/count[city], 1)
 
     return sred
-def warmes_city(records: list[dict]): # ->str
+def warmes_city(records: list[dict]) -> str:
     # город с наибольшей средней температурой. При равенстве - первый по алфавиту
 
     aver = average_by_city(records)
 
+    if not aver:
+        return ""
     # использую min т.к. нам нужен город в алфавитном порядке, а чтобы была максимальная температура прописываем в лямбде -aver    
     best_city = min(aver, key=lambda x: (-aver[x],x))
 
