@@ -25,7 +25,8 @@ def parse_record(line:str) -> dict:
     try: # попробуем преобразовать температуру если она число
         temp = float(temp_str)
     except: # если не получилось
-        raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
+        #raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
+        raise TypeError('Температура введена через запятую, а не точку')
 
     # возвращаем результат в виде словаря
     return {'city':city,'temperature':temp,'date':date}
