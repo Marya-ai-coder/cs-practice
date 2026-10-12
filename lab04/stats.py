@@ -63,4 +63,11 @@ def average_by_city(records: list[dict]) -> dict:
     return sred
 def warmes_city(records: list[dict]): # ->str
     # город с наибольшей средней температурой. При равенстве - первый по алфавиту
+
+    aver = average_by_city(records)
+
+    # использую min т.к. нам нужен город в алфавитном порядке, а чтобы была максимальная температура прописываем в лямбде -aver    
+    best_city = min(aver, key=lambda x: (-aver[x],x))
+
+    return best_city
     
