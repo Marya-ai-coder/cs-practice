@@ -1,5 +1,8 @@
 def parse_record(line:str) -> dict:
-    
+
+    #проверяем на тип аргумента
+    if not isinstance(line,str):
+        raise ValueError(f'ожидалась строка, а получено {type(line).__name__}')
     # разбирает строку "город;температура;дата" в словарь Негодная строка - ValueError
     
     parts = line.split(';') # список ["город";"температура";"дата"]
@@ -61,7 +64,7 @@ def average_by_city(records: list[dict]) -> dict:
         sred[city] = round(total[city]/count[city], 1)
 
     return sred
-def warmes_city(records: list[dict]) -> str:
+def warmest_city(records: list[dict]) -> str:
     # город с наибольшей средней температурой. При равенстве - первый по алфавиту
 
     aver = average_by_city(records)

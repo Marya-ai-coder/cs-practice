@@ -4,7 +4,7 @@
 
 import sys 
 
-from stats import average_by_city, read_valid, warmes_city
+from stats import average_by_city, read_valid, warmest_city
 
 # читаем чтороки из стандартного ввода
 lines = sys.stdin.read().splitlines() 
@@ -17,7 +17,7 @@ good_count = len(records) # Количество корректных запис
 skip_count = len(lines) - good_count # количество не годных записей
 
 sred = average_by_city(records)# получаем средние температуры
-best = warmes_city(records) # получаем название города с самой высокой средней температурой чтобы потомиспользовать как ключ для поиска
+best = warmest_city(records) # получаем название города с самой высокой средней температурой чтобы потомиспользовать как ключ для поиска
 
 print(good_count) # сколько записей разобрано
 print(skip_count) # сколько записей пропущено
