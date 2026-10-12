@@ -1,8 +1,5 @@
 def parse_record(line:str) -> dict:
 
-    #проверяем на тип аргумента
-    if not isinstance(line,str):
-        raise ValueError(f'ожидалась строка, а получено {type(line).__name__}')
     # разбирает строку "город;температура;дата" в словарь Негодная строка - ValueError
     
     parts = line.split(';') # список ["город";"температура";"дата"]
@@ -25,7 +22,7 @@ def parse_record(line:str) -> dict:
     try: # попробуем преобразовать температуру если она число
         temp = float(temp_str)
     except: # если не получилось
-        #raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
+        raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
         raise TypeError('Температура введена через запятую, а не точку')
 
     # возвращаем результат в виде словаря
