@@ -15,14 +15,14 @@ def parse_record(line:str) -> dict:
     if not city:
         raise ValueError('Пустое название города в строке')
 
+    date = date_str.strip()
+    if not date:
+        raise ValueError('Пустое значение даты')
+
     try: # попробуем преобразовать температуру если она число
         temp = float(temp_str)
     except: # если не получилось
         raise ValueError(f' Неудалось преобразовать температуру {temp_str} в число')
-
-    date = date_str.strip()
-    if not date:
-        raise ValueError('Пустое значение даты')
 
     # возвращаем результат в виде словаря
     return {'city':city,'temp':temp,'date':date}
@@ -47,13 +47,20 @@ def average_by_city(records: list[dict]) -> dict:
     total = {} # создаем словарь в котором считаем сумму температур по городу
     count = {} # создаём словарь в котором считаем колличество записей
 
-    for rec in records:
-        city = rec['city']
-        temp = rec['temp']
-        total[city] = total.get(city, 0.0) + temp
+    for rec in records: # проходимя по словарям из списка словарей
+        city = rec['city'] # присваиваю переменной city значение города для имеено этой итерации
+        temp = rec['temp'] 
+        total[city] = total.get(city, 0.0) + temp #обращаюсь к словарю total по ключу city значение которого я присвоила еще пару строк назад. \n
+        # с помощью get я достаю определённое значение под данным ключом и к этому значению добавляю температуру. \n
+        # если ключ встрнечается впервые, то get вернёт значение заданное по умолчанию (0.0) и добавляю значение температуры из переменной выше
         count[city] = count.get(city, 0) + 1
 
-    return {city: round(total[city]
+    sred = {} # создала словарь чтобы помощать средние значения температур по городу
+
+    for city in total: # проходимся по каждому значению ключа город из словаря 
+        sred[city] = round(total[city]/count[city], 1)
+
+    return sred
 def warmes_city(records: list[dict]): # ->str
     # город с наибольшей средней температурой. При равенстве - первый по алфавиту
     
