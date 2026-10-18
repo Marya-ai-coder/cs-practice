@@ -17,11 +17,9 @@ def parse_event(line:str) -> dict:
         raise ValueError('незнакомый уровень')
     
         
-    massages = ' '.join(massages_list).rstrip('\n') #cp1251
-    massage = massages#.encode("cp1251").decode("utf-8")
-    
-    return {'time':time, 'level':level,'message':massage }
+    massage = ' '.join(massages_list).rstrip('\n') #cp1251
 
+    return {'time':time, 'level':level,'message':massage }
 
 def list_levels(dict_pe: dict) -> str:
     
@@ -30,14 +28,20 @@ def list_levels(dict_pe: dict) -> str:
 def list_error(dict_pe: dict) -> str:
     
     if dict_pe['level'] == 'ERROR':
-        return dict_pe.get('massage')
+        return dict_pe.get('message')
 
 def count_levels(lines: list[str])-> dict:
     
     count = {}
 
-    for i in lines:
-        count[i] = count.get(i,0) + 1
+    for line in lines:
+        try:
+            e = parse_event(line)
+            level = e.get('level')
+        except ValueError:
+            level = 'BROKEN'
+            
+        count[level] = count.get(level,0) + 1
         
     sorted_count = dict(sorted(count.items()))
     
