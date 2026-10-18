@@ -34,12 +34,12 @@ def main():
     
     format_report(count_levels(list_level), top_errors(list_errors,3))
 
-    with open('report.txt','w',encoding='utf-8') as f:
-        f.write(str(len(list_level))+'\n')
-        f.write(str(list_level.count('ERROR'))+'\n')
+    #with open('report.txt','w',encoding='utf-8') as f:
+        #f.write(str(len(list_level))+'\n')
+        #f.write(str(list_level.count('ERROR'))+'\n')
         
-        if len(list_level) != 0:
-            f.write(str(list_level.count('BROKEN')))
+        #if len(list_level) != 0:
+            #f.write(str(list_level.count('BROKEN')))
     
 if __name__=="__main__":
     main()

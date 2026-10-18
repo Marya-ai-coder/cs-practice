@@ -58,14 +58,15 @@ def top_errors(lines:list[str], n:int) -> list[list]:
     
 
 def format_report(counts: dict, errors: list[list]) -> str:
-    
-    print('Отчёт по журналу\n')
-    for n in counts.items():
-        print(*n, sep=": ")
-    print('')
-    print('Частые ошибки: ')
-    for k,v in errors:
-        print(f'- {k} - {v}')
+    with open('report.txt','w', encoding='utf-8') as f:
+        f.write('Отчёт по журналу\n')
+        f.write('\n')
+        for n in counts.items():
+            f.write(f'{n[0]}: {n[1]}\n')
+        f.write('\n')
+        f.write('Частые ошибки:\n')
+        for k,v in errors:
+            f.write(f'- {k} - {v}\n')
     
     
             
