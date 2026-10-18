@@ -41,13 +41,13 @@ def count_levels(lines: list[str])-> dict:
 
     return count
 
-def top_error(lines:list[str], n:count) -> list[list]:
+def top_errors(lines:list[str], n:count) -> list[list]:
 
     top = {}
 
     for i in lines:
         if i is not None:
-            if i is not'BROKEN':
+            if i != 'BROKEN':
                 top[i] = top.get(i,0) + 1
 
     top_er = sorted(top.items(), key = lambda x: x[1], reverse = True)
@@ -55,10 +55,14 @@ def top_error(lines:list[str], n:count) -> list[list]:
     return top_er[:n]
     
 
-#def format_report(counts: dict,errors: list[list]) -> str:
-    # errors : list[list] - top_errors
-    # counts : dict - count_levels 
-   
+def format_report(counts: dict,errors: list[list]) -> str:
+    
+    with open('report.txt','w',encoding='utf-8') as f:
+        f.write(str(len(counts))+'\n')
+        f.write(str(counts.count('ERROR'))+'\n')
+        
+        if len(counts) != 0:
+            f.write(str(counts.count('BROKEN')))
         
             
         
