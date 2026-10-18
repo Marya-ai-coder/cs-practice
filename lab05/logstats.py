@@ -11,36 +11,37 @@ def parse_event(line:str) -> dict:
     
     time = time_str.strip()
 
-    try:
-        level = level_str.strip()
-        
-        if level not in lev:
-            raise ValueError('незнакомый уровень')
-    except ValueError:
-        level = 'BROKEN'
-
+    level = level_str.strip()
     
-
+    if level not in lev:
+        raise ValueError('незнакомый уровень')
+    
+        
     massages = ' '.join(massages_list).rstrip('\n') #cp1251
     massage = massages.encode("cp1251").decode("utf-8")
     
     return {'time':time, 'level':level,'massage':massage }  #locale.getpreferredencoding()
 
-def count_levels(lines: list[str])-> dict:
-    parts = lines.split(' ')
-    lvl = {}
+
+def list_levels(dict_pe: dict) -> str:
     
-    for l in lines:
-        DEBUG ='DEBUG'
-        INFO = 'INFO''ERROR'
-        WARNING = 'WARNING'
-        ERROR = parts['ERROR']
-        BROKEN = 'BROKEN'
+    return dict_pe.get('level')
 
-        lvl[ERROR] = lvl.get('ERROR',0) + 1
+#def count_levels(lines: list[dict])-> dict:
+    
+    
 
-    return lvl
+    
 
+    
+    
+#def top_errors(lines:list[str], n:count) -> list[list]:
+
+    
+
+#def format_report(counts: dict,errors: list[list]) -> str:
+    # errors : list[list] - top_errors
+    # counts : dict - count_levels 
    
         
             

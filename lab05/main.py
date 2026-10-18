@@ -1,15 +1,16 @@
 import sys
 
-from logstats import parse_event, count_levels
+from logstats import parse_event, list_levels
 
+list_level = []
 
 for line in sys.stdin:
-
-    print(type(line))
-    print(parse_event(line))
-    #lines = line.split(' ')    
-    #print(count_levels(lines))
-
     
+    try:
+        list_level.append(list_levels(parse_event(line)))
+    except ValueError:
+        list_level.append('BROKEN')
+    
+    print(list_level)
 #if __name__=="__main__":
     #main()
