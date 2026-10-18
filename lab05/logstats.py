@@ -18,7 +18,7 @@ def parse_event(line:str) -> dict:
     
         
     massages = ' '.join(massages_list).rstrip('\n') #cp1251
-    massage = massages.encode("cp1251").decode("utf-8")
+    massage = massages#.encode("cp1251").decode("utf-8")
     
     return {'time':time, 'level':level,'massage':massage }
 
@@ -38,8 +38,10 @@ def count_levels(lines: list[str])-> dict:
 
     for i in lines:
         count[i] = count.get(i,0) + 1
-
-    return count
+        
+    sorted_count = dict(sorted(count.items()))
+    
+    return sorted_count
 
 def top_errors(lines:list[str], n:count) -> list[list]:
 
@@ -55,15 +57,17 @@ def top_errors(lines:list[str], n:count) -> list[list]:
     return top_er[:n]
     
 
-def format_report(counts: dict,errors: list[list]) -> str:
+def format_report(counts: dict, errors: list[list]) -> str:
+
+    print('Отчёт по журналу\n')
+    for n in counts.items():
+        print(*n, sep=": ")
+    print('')
+    print('Частые ошибки: ')
+    for k,v in errors:
+        print(f'- {k} - {v}')
     
-    with open('report.txt','w',encoding='utf-8') as f:
-        f.write(str(len(counts))+'\n')
-        f.write(str(counts.count('ERROR'))+'\n')
-        
-        if len(counts) != 0:
-            f.write(str(counts.count('BROKEN')))
-        
+    
             
         
 
