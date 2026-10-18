@@ -43,7 +43,7 @@ def count_levels(lines: list[str])-> dict:
     
     return sorted_count
 
-def top_errors(lines:list[str], n:count) -> list[list]:
+def top_errors(lines:list[str], n:int) -> list[list]:
 
     top = {}
 
