@@ -1,18 +1,15 @@
 import sys
 
-from logstats import parse_event
+from logstats import parse_event, count_levels
 
 
-def read_lines():
-    with open("report.txt","w", encoding="utf-8") as rep:
-        for line in sys.stdin:
-            rep.write(parse_event(line)+'\n')
-            #return parse_event(line)
-            
+for line in sys.stdin:
 
-def main():            
-    print(read_lines())
+    print(type(line))
+    print(parse_event(line))
+    #lines = line.split(' ')    
+    #print(count_levels(lines))
 
     
-if __name__=="__main__":
-    main()
+#if __name__=="__main__":
+    #main()
