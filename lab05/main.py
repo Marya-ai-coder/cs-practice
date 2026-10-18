@@ -20,12 +20,18 @@ for line in sys.stdin:
         list_errors.append('BROKEN')
 
     
-#print(list_level)
+print(list_level)
+print(list_errors)
 print(count_levels(list_level))
 print(top_error(list_errors,1))
 
 def main():
     with open('report.txt','w',encoding='utf-8') as f:
+        f.write(str(len(list_level))+'\n')
+        f.write(str(list_level.count("ERROR"))+'\n')
+        
+        if len(list_errors) != 0:
+            f.write(str(list_level.count('BROKEN')))
 
-#if __name__=="__main__":
-    #main()
+if __name__=="__main__":
+    main()
