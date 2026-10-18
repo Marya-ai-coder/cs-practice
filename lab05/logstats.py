@@ -20,7 +20,7 @@ def parse_event(line:str) -> dict:
     massages = ' '.join(massages_list).rstrip('\n') #cp1251
     massage = massages#.encode("cp1251").decode("utf-8")
     
-    return {'time':time, 'level':level,'massage':massage }
+    return {'time':time, 'level':level,'message':massage }
 
 
 def list_levels(dict_pe: dict) -> str:
@@ -58,7 +58,7 @@ def top_errors(lines:list[str], n:int) -> list[list]:
     
 
 def format_report(counts: dict, errors: list[list]) -> str:
-
+    
     print('Отчёт по журналу\n')
     for n in counts.items():
         print(*n, sep=": ")

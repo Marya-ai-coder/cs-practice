@@ -25,6 +25,13 @@ with open(path, encoding='utf-8') as f:
 #print(list_errors)
 
 def main():
+
+    print(str(len(list_level)))
+    print(str(list_level.count('ERROR')))
+        
+    if len(list_level) != 0:
+        print(str(list_level.count('BROKEN')))
+    
     format_report(count_levels(list_level), top_errors(list_errors,3))
 
     with open('report.txt','w',encoding='utf-8') as f:
