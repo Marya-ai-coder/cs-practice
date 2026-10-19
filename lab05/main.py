@@ -13,7 +13,7 @@ def main():
     
     with open(path, encoding='utf-8') as f:
         for line in f:
-            
+            line = line.strip()
             lines.append(line)
 
             try:
