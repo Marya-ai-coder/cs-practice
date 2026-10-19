@@ -23,8 +23,8 @@ def main():
             except ValueError:
                 list_level.append('BROKEN')
                 list_errors.append('BROKEN')
-            
-    format_report(count_levels(lines), top_errors(list_errors,3))
+    
+    format_report(count_levels(lines), top_errors(lines,3))
 
     print(str(len(list_level)))
     print(str(list_level.count('ERROR')))

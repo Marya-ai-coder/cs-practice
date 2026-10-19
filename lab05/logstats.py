@@ -50,15 +50,21 @@ def count_levels(lines: list[str])-> dict:
 def top_errors(lines:list[str], n:int) -> list[list]:
 
     top = {}
-
-    for i in lines:
-        if i is not None:
-            if i != 'BROKEN':
-                top[i] = top.get(i,0) + 1
+    for line in lines:
+        try:
+            e = parse_event(line)
+            
+            if e.get('level') == "ERROR":
+                errorM = e.get('message')
+                top[errorM] = top.get(errorM,0) + 1
+        except ValueError:
+            level = 'BROKEN'
 
     top_er = sorted(top.items(), key = lambda x: x[1], reverse = True)
 
-    return top_er[:n]
+    top_error = [list(i) for i in top_er[:n]]
+                     
+    return top_error
     
 
 def format_report(counts: dict, errors: list[list]) -> str:
@@ -69,8 +75,8 @@ def format_report(counts: dict, errors: list[list]) -> str:
             f.write(f'{n[0]}: {n[1]}\n')
         f.write('\n')
         f.write('Частые ошибки:\n')
-        for k,v in errors:
-            f.write(f'- {k} - {v}\n')
+        for n in errors:
+            f.write(f'- {n[0]} - {n[1]}\n')
     
     
             
