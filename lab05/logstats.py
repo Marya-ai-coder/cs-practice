@@ -68,15 +68,21 @@ def top_errors(lines:list[str], n:int) -> list[list]:
     
 
 def format_report(counts: dict, errors: list[list]) -> str:
+    st = []
+    
+    st.append('Отчёт по журналу\n\n')
+    for n in counts.items():
+        st.append(f'{n[0]}: {n[1]}\n')
+    st.append('\nЧастые ошибки:\n')
+    for n in errors:
+        st.append(f'- {n[0]} - {n[1]}\n')
+        
+    res = ''.join(st)
+    
     with open('report.txt','w', encoding='utf-8') as f:
-        f.write('Отчёт по журналу\n')
-        f.write('\n')
-        for n in counts.items():
-            f.write(f'{n[0]}: {n[1]}\n')
-        f.write('\n')
-        f.write('Частые ошибки:\n')
-        for n in errors:
-            f.write(f'- {n[0]} - {n[1]}\n')
+        f.write(res)
+
+        return res
     
     
             
