@@ -75,7 +75,7 @@ def format_report(counts: dict, errors: list[list]) -> str:
         st.append(f'{n[0]}: {n[1]}\n')
     st.append('\nЧастые ошибки:\n')
     for n in errors:
-        st.append(f'- {n[0]} - {n[1]}\n')
+        st.append(f'- {n[0]} — {n[1]}\n')
         
     res = ''.join(st)
     
